@@ -1,0 +1,9 @@
+INSER INTO category (description) VALUES ("American");
+INSER INTO category (description) VALUES ("Mexican");
+INSER INTO category (description) VALUES ("Italian");
+INSER INTO category (description) VALUES ("Fast Food");
+INSERT INOT unit_of_measure (description) VALUES ("Teaspoon");
+INSERT INOT unit_of_measure (description) VALUES ("Tablespoon");
+INSERT INOT unit_of_measure (description) VALUES ("Cup");
+INSERT INOT unit_of_measure (description) VALUES ("Pinch");
+INSERT INOT unit_of_measure (description) VALUES ("Ounce");

@@ -1,0 +1,12 @@
+package com.springframework.spring5recipeapp.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+@Entity
+public class UnitOfMeasure {
+	
+	@OneToOne
+	private String description;
+
+}

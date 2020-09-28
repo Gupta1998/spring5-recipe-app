@@ -1,0 +1,9 @@
+package com.springframework.spring5recipeapp.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.springframework.spring5recipeapp.domain.UnitOfMeasure;
+
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long>{
+
+}

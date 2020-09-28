@@ -1,0 +1,5 @@
+package com.springframework.spring5recipeapp.bootstrap;
+
+public class RecipeBootstrap {
+
+}

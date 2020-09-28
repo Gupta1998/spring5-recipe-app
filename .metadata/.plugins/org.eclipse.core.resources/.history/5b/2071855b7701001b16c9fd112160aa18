@@ -1,0 +1,80 @@
+package com.springframework.spring5recipeapp.bootstrap;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import com.springframework.spring5recipeapp.domain.Category;
+import com.springframework.spring5recipeapp.domain.Difficulty;
+import com.springframework.spring5recipeapp.domain.Ingredient;
+import com.springframework.spring5recipeapp.domain.Notes;
+import com.springframework.spring5recipeapp.domain.Recipe;
+import com.springframework.spring5recipeapp.domain.UnitOfMeasure;
+import com.springframework.spring5recipeapp.repository.CategoryRepository;
+import com.springframework.spring5recipeapp.repository.RecipeRepository;
+import com.springframework.spring5recipeapp.repository.UnitOfMeasureRepository;
+
+public class RecipeBootstrap {
+
+	private RecipeRepository recipeRepository;
+	private CategoryRepository categoryRepository;
+	private UnitOfMeasureRepository unitOfMeasureRepository;
+	
+	public RecipeBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
+			UnitOfMeasureRepository unitOfMeasureRepository) {
+		this.recipeRepository = recipeRepository;
+		this.categoryRepository = categoryRepository;
+		this.unitOfMeasureRepository = unitOfMeasureRepository;
+	}
+	
+	private List<Recipe> getRecipies(){
+		
+		List<Recipe> recipes = new ArrayList<>(2);
+		
+		// get UOM's
+		Optional<UnitOfMeasure> teaspoonOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+		Optional<UnitOfMeasure> tablespoonOptional = unitOfMeasureRepository.findByDescription("Tablespoon");
+		Optional<UnitOfMeasure> cupOptional = unitOfMeasureRepository.findByDescription("Cup");
+		Optional<UnitOfMeasure> pinchOptional = unitOfMeasureRepository.findByDescription("Pinch");
+		Optional<UnitOfMeasure> ounceOptional = unitOfMeasureRepository.findByDescription("Ounce");
+		
+		// get uom optinal
+		UnitOfMeasure teaspoonUom = teaspoonOptional.get();
+		UnitOfMeasure tablespoonUom = tablespoonOptional.get();
+		UnitOfMeasure cupUom = cupOptional.get();
+		UnitOfMeasure pinchUom = pinchOptional.get();
+		UnitOfMeasure ounceUom = ounceOptional.get();
+		
+		// get category
+		Optional<Category> americanOptional = categoryRepository.findByDescription("American");
+		Optional<Category> mexicanOptional = categoryRepository.findByDescription("Mexican");
+		
+		// get category optinal
+		Category americanCategory = americanOptional.get();
+		Category mexicanCategory = mexicanOptional.get();
+		
+		
+		//new recipe
+		Recipe newRecipe = new Recipe();
+		newRecipe.setDescription("Tast Recipe");
+		newRecipe.setCookTime(10);
+		newRecipe.setPrepTime(20);
+		newRecipe.setDifficulty(Difficulty.EASY);
+		newRecipe.setDirections("Directions of making recipe will go here");
+		
+		Notes newRecipeNotes = new Notes();
+		newRecipeNotes.setRecipeNotes("Recipe notes will go here");
+		
+		newRecipe.setNotes(newRecipeNotes);
+		
+		newRecipe.getIngredients().add(new Ingredient("description1", new BigDecimal(2), teaspoonUom));
+		newRecipe.getIngredients().add(new Ingredient("description2", new BigDecimal(3), cupUom));
+		
+		newRecipe.getCategories().add(mexicanCategory);
+		newRecipe.getCategories().add(americanCategory);
+		
+		return recipes.add(newRecipe);
+	}
+	
+}
